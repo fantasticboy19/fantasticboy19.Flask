@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+        <h1>This is an blog</h1>
+    {% for foo in posts %}
+        <p>BY {{ foo['author'] }}</p>
+        <p>RELEASE {{ foo['date'] }}</p>
+    {% endfor %}
+
+{% endblock content %}
