@@ -4,7 +4,11 @@
     {% block head %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user.name }}'s Watchlist</title>
+    {% if not user %}
+        <title>Watchlist</title>
+    {% else %}
+        <title>{{ user.name }}'s Watchlist</title>
+    {% endif %}
     <link rel="icon" href="{{ url_for('static', filename='image/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" type="text/css">
     {% endblock %}
@@ -20,6 +24,12 @@
     <nav>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
+            {% if current_user.is_authenticated %}
+	<li><a href="{{ url_for('settings') }}">Settings</a></li>
+	<li><a href="{{ url_for('logout') }}">Logout</a></li>
+{% else %}
+	<li><a href="{{ url_for('login') }}">Login</a></li>
+{% endif %}
         </ul>
     </nav>
     {% block content %}{% endblock %}
